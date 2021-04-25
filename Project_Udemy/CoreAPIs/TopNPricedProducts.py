@@ -14,8 +14,8 @@ def getTopN(p, n):
 
 
 if __name__ == "__main__":
-    sc = SparkContext(master='local', appName="CoreAPIs")
-    products = sc.textFile("/user/spark/retail_db/products/part-00000")
+    sc = SparkContext(master='spark://192.168.56.104:7077', appName="CoreAPIs")
+    products = sc.textFile("/user/spark/data/retail_db/products/part-00000")
     products_pair = products.map(lambda p: (int(Utils.comma_delimiter.split(p)[1]), p))
     products_topn = products_pair.groupByKey().flatMap(lambda o: getTopN(o[1], 3))
     for i in products_topn.take(10):
