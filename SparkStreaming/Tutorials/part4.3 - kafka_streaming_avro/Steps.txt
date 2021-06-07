@@ -1,0 +1,28 @@
+Step 1 : Run kafka Server
+
+	Step1 : Start Zookeeper
+ 		./bin/zookeeper-server-start.sh config/zookeeper.properties
+	Step2: Start Kafka Broker
+                ./ bin/kafka-server-start.sh config/server.properties
+
+	host is localhost
+	port 9092
+
+Step 2 : Create topic
+
+	kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092
+
+Step 3 : Run kafka producer program under folder kafka_producer_consumer/kafka_producer_avro.py
+
+Step 4 : add kafka package in spark
+
+	./conf/spark-defaults.conf
+		add below:
+			spark.master spark://localhost:7077
+			spark.jars.packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1,org.apache.spark:spark-avro_2.12:3.0.1
+
+	run spark streaming program
+
+		kafka_streaming_avro_demo.py
+
+
