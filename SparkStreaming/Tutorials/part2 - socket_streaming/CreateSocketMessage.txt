@@ -1,0 +1,4 @@
+--open command prompt
+$netapp -lk 9901
+apple mango
+orange apple
